@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.CorsoDTO;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.service.CorsoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ public class CorsoController {
 
     @Autowired
     Converter converter;
-
 
     // LISTA
     @GetMapping("/lista")
@@ -44,13 +44,22 @@ public class CorsoController {
     @PostMapping("/new")
     public ResponseEntity<CorsoDTO> showAdd(@RequestBody CorsoDTO corso) {
 
-        // converto
-        Corso nuovo = converter.corso_convert_to_entity(corso);
+        // controllo se il docente esiste
+        DocenteDTO docente = corsoService.getDocenteById(corso.getIdDoc());
 
-        // salvo
-        corsoService.save(nuovo);
-        //
-        return ResponseEntity.ok(corso);
+        if (docente == null) {
+            throw new RuntimeException("Docente not found");
+        } else {
+            // converto
+            Corso nuovo = converter.corso_convert_to_entity(corso);
+
+            // salvo
+            corsoService.save(nuovo);
+            System.out.println("L'id docente è " + nuovo.getIdDoc());
+            System.out.println("Il nome del docente è " + docente.getNome());
+            //
+            return ResponseEntity.ok(corso);
+        }
     }
 
 
