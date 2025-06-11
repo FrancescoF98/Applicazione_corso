@@ -23,13 +23,21 @@ public class Corso {
     @Column(name = "id_doc")
     private Long idDoc;
 
+    @Column(name = "Nome Docente")
+    private String docente_nome;
+
+    @Column(name = "Cognome Docente")
+    private String docente_cognome;
+
     /* costruttori */
     public Corso() {}
 
-    public Corso(String nome, Integer anno_accademico, Long idDoc) {
+    public Corso(String nome, Integer anno_accademico, Long idDoc, String docente_nome, String docente_cognome) {
         this.nome = nome;
         this.anno_accademico = anno_accademico;
         this.idDoc = idDoc;
+        this.docente_nome = docente_nome;
+        this.docente_cognome = docente_cognome;
     }
 
     public Long getId() {
@@ -62,5 +70,21 @@ public class Corso {
 
     public void setIdDoc(Long idDoc) {
         this.idDoc = idDoc;
+    }
+
+    public String getDocente_nome() {
+        return docente_nome;
+    }
+
+    public void setDocente_nome(String docente_nome) {
+        this.docente_nome = docente_nome;
+    }
+
+    public String getDocente_cognome() {
+        return docente_cognome;
+    }
+
+    public void setDocente_cognome(String docente_cognome) {
+        this.docente_cognome = docente_cognome;
     }
 }

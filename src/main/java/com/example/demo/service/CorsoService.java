@@ -6,6 +6,7 @@ import com.example.demo.repository.CorsoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.List;
 
@@ -21,20 +22,60 @@ public class CorsoService {
 
 
     public void saveWithDocente(Corso corso){
-        System.out.println("L'id del docente è " + corso.getIdDoc());
-        // controllo se il docente esiste
-        DocenteDTO docente = webClient.get()
-                .uri("/docenti/{id}", corso.getIdDoc())
-                .retrieve()
-                .bodyToMono(DocenteDTO.class)
-                .block();
+//        // controllo se il docente esiste
+//        DocenteDTO docente = webClient.get()
+//                .uri("/docenti/{nome}_{cognome}", corso.getDocente_nome(), corso.getDocente_cognome())
+//                .retrieve()
+//                .bodyToMono(DocenteDTO.class)
+//                .block();
+//
+//        if (docente == null) {
+//            DocenteDTO nuovo_docente = new DocenteDTO();
+//            nuovo_docente.setNome(corso.getDocente_nome());
+//            nuovo_docente.setCognome(corso.getDocente_cognome());
+//
+//            // se non esiste lo creo
+//            DocenteDTO new_docente = webClient.post()
+//                    .uri("/docenti/new")
+//                    .bodyValue(nuovo_docente) // sends JSON body
+//                    .retrieve()
+//                    .bodyToMono(DocenteDTO.class)
+//                    .block();
+////          throw new RuntimeException("Docente not found");
+//        } else {
+//            save(corso);
+//        }
 
-        System.out.println("Il nome del docente è " + docente.getNome());
-        if (docente == null) {
-            throw new RuntimeException("Docente not found");
-        } else {
+
+
+        try {
+            DocenteDTO docente = webClient.get()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/docenti/search")
+                            .queryParam("nome", corso.getDocente_nome())
+                            .queryParam("cognome", corso.getDocente_cognome())
+                            .build())
+                    .retrieve()
+                    .bodyToMono(DocenteDTO.class)
+                    .block();
             save(corso);
+            System.out.println("Il docente esiste ed è: " + corso.getDocente_nome());
+        } catch (WebClientResponseException.NotFound ex) {
+            // Docente not found — create it
+            DocenteDTO nuovo_docente = new DocenteDTO();
+            nuovo_docente.setNome(corso.getDocente_nome());
+            nuovo_docente.setCognome(corso.getDocente_cognome());
+
+            DocenteDTO docente = webClient.post()
+                    .uri("/docenti/new")
+                    .bodyValue(nuovo_docente)
+                    .retrieve()
+                    .bodyToMono(DocenteDTO.class)
+                    .block();
+            save(corso);
+            System.out.println("Il docente NON esisteva ed è stato creato col nome: " + corso.getDocente_nome());
         }
+
     }
 
     public List<Corso> findAll() {

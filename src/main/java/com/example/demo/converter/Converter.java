@@ -23,8 +23,10 @@ public class Converter {
             String nome = elementi_in_entrata.get(i).getNome();
             Integer anno_accademico = elementi_in_entrata.get(i).getAnno_accademico();
             Long idDoc = elementi_in_entrata.get(i).getIdDoc();
+            String docente_nome = elementi_in_entrata.get(i).getDocente_nome();
+            String docente_cognome = elementi_in_entrata.get(i).getDocente_cognome();
 
-            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico, idDoc);
+            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico, idDoc, docente_nome, docente_cognome);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -32,6 +34,10 @@ public class Converter {
         // restituisco la lista convertita
         return elementi_convertiti;
     }
+
+
+
+
 
     // Da ENTITY a DTO - singolo elemento
     public CorsoDTO corso_convert_to_dto(Corso elementi_in_entrata){
@@ -41,9 +47,15 @@ public class Converter {
         nuovo_elemento.setId(elementi_in_entrata.getId());
         nuovo_elemento.setNome(elementi_in_entrata.getNome());
         nuovo_elemento.setIdDoc(elementi_in_entrata.getIdDoc());
+        nuovo_elemento.setDocente_nome(elementi_in_entrata.getDocente_nome());
+        nuovo_elemento.setDocente_cognome(elementi_in_entrata.getDocente_cognome());
 
         return nuovo_elemento;
     }
+
+
+
+
 
     // Da DTO a ENTITY - lista
     public List<Corso> corso_convert_to_entity(List<CorsoDTO> elementi_in_entrata){
@@ -58,6 +70,9 @@ public class Converter {
             String nome = elementi_in_entrata.get(i).getNome();
             Integer anno_accademico = elementi_in_entrata.get(i).getAnno_accademico();
             Long idDoc = elementi_in_entrata.get(i).getIdDoc();
+            String docente_nome = elementi_in_entrata.get(i).getDocente_nome();
+            String docente_cognome = elementi_in_entrata.get(i).getDocente_cognome();
+
             //List<Discente> discenti = discente_convert_to_entity(elementi_in_entrata.get(i).getDiscenti());
 
             Corso nuovo_elemento = new Corso();
@@ -65,6 +80,8 @@ public class Converter {
             nuovo_elemento.setNome(nome);
             nuovo_elemento.setAnno_accademico(anno_accademico);
             nuovo_elemento.setIdDoc(idDoc);
+            nuovo_elemento.setDocente_nome(docente_nome);
+            nuovo_elemento.setDocente_cognome(docente_cognome);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -73,6 +90,10 @@ public class Converter {
         return elementi_convertiti;
     }
 
+
+
+
+
     // Da DTO a ENTITY - singolo elemento
     public Corso corso_convert_to_entity(CorsoDTO elementi_in_entrata){
 
@@ -80,12 +101,17 @@ public class Converter {
         String nome = elementi_in_entrata.getNome();
         Integer anno_accademico = elementi_in_entrata.getAnno_accademico();
         Long idDoc = elementi_in_entrata.getIdDoc();
+        String docente_nome = elementi_in_entrata.getDocente_nome();
+        String docente_cognome = elementi_in_entrata.getDocente_cognome();
+
 
         Corso nuovo_elemento = new Corso();
 
         nuovo_elemento.setNome(nome);
         nuovo_elemento.setAnno_accademico(anno_accademico);
         nuovo_elemento.setIdDoc(idDoc);
+        nuovo_elemento.setDocente_nome(docente_nome);
+        nuovo_elemento.setDocente_cognome(docente_cognome);
 
         return nuovo_elemento;
     }

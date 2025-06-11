@@ -17,14 +17,20 @@ public class CorsoDTO {
 
     private Long idDoc;
 
+    private String docente_nome;
+
+    private String docente_cognome;
+
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Integer anno_accademico, Long idDoc) {
+    public CorsoDTO(Long id, String nome, Integer anno_accademico, Long idDoc, String docente_nome, String docente_cognome) {
         this.id = id;
         this.nome = nome;
         this.anno_accademico = anno_accademico;
         this.idDoc = idDoc;
+        this.docente_nome = docente_nome;
+        this.docente_cognome = docente_cognome;
     }
 
     @JsonIgnore
@@ -58,5 +64,21 @@ public class CorsoDTO {
 
     public void setIdDoc(Long idDoc) {
         this.idDoc = idDoc;
+    }
+
+    public String getDocente_nome() {
+        return docente_nome;
+    }
+
+    public void setDocente_nome(String docente_nome) {
+        this.docente_nome = docente_nome;
+    }
+
+    public String getDocente_cognome() {
+        return docente_cognome;
+    }
+
+    public void setDocente_cognome(String docente_cognome) {
+        this.docente_cognome = docente_cognome;
     }
 }

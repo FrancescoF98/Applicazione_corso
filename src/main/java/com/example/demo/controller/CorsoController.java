@@ -63,6 +63,8 @@ public class CorsoController {
         corso.setNome(aggiornato.getNome());
         corso.setAnno_accademico(aggiornato.getAnno_accademico());
         corso.setIdDoc(aggiornato.getIdDoc());
+        corso.setDocente_nome(aggiornato.getDocente_nome());
+        corso.setDocente_cognome(aggiornato.getDocente_cognome());
 
         corsoService.saveWithDocente(corso);
         return ResponseEntity.ok(aggiornato);
