@@ -48,7 +48,7 @@ public class CorsoController {
         Corso nuovo = converter.corso_convert_to_entity(corso);
 
         // salvo
-        corsoService.save(nuovo);
+        corsoService.saveWithDocente(nuovo);
         //
         return ResponseEntity.ok(corso);
     }
@@ -62,8 +62,9 @@ public class CorsoController {
         //
         corso.setNome(aggiornato.getNome());
         corso.setAnno_accademico(aggiornato.getAnno_accademico());
+        corso.setIdDoc(aggiornato.getIdDoc());
 
-        corsoService.save(corso);
+        corsoService.saveWithDocente(corso);
         return ResponseEntity.ok(aggiornato);
     }
 

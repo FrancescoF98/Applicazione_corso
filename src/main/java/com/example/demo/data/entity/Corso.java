@@ -1,5 +1,6 @@
 package com.example.demo.data.entity;
 
+import com.example.demo.data.dto.DocenteDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -16,18 +17,19 @@ public class Corso {
     @Column(nullable = false)
     private String nome;
 
-
     @Column(nullable = false)
     private Integer anno_accademico;
 
-
+    @Column(name = "id_doc")
+    private Long idDoc;
 
     /* costruttori */
     public Corso() {}
 
-    public Corso(String nome, Integer anno_accademico) {
+    public Corso(String nome, Integer anno_accademico, Long idDoc) {
         this.nome = nome;
         this.anno_accademico = anno_accademico;
+        this.idDoc = idDoc;
     }
 
     public Long getId() {
@@ -54,5 +56,11 @@ public class Corso {
         this.anno_accademico = anno_accademico;
     }
 
-}
+    public Long getIdDoc() {
+        return idDoc;
+    }
 
+    public void setIdDoc(Long idDoc) {
+        this.idDoc = idDoc;
+    }
+}
