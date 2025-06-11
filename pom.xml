@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
+        <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.elitesoftwarehouse</groupId>
@@ -30,6 +30,19 @@
     <properties>
         <java.version>17</java.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>2023.0.1</version> <!-- compatible with Spring Boot 3.2.x and 3.4.x -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -89,6 +102,13 @@
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
         </dependency>
+
+        <!-- OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
 
     </dependencies>
 

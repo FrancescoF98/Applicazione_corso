@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.client.DocenteClient;
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.CorsoDTO;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.service.CorsoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,12 +48,30 @@ public class CorsoController {
 
         // converto
         Corso nuovo = converter.corso_convert_to_entity(corso);
-
         // salvo
-        corsoService.save(nuovo);
+        corsoService.saveWithDocente(nuovo);
         //
         return ResponseEntity.ok(corso);
     }
+
+//    // POST - nuovo
+//    @PostMapping("/new")
+//    public ResponseEntity<CorsoDTO> showAdd(@RequestBody CorsoDTO corso) {
+//
+//        // controllo se il docente esiste
+//        DocenteDTO docente = DocenteClient.getDocenteById(corso.getIdDoc());
+//
+//        if (docente == null) {
+//            throw new RuntimeException("Docente not found");
+//        } else {
+//            // converto
+//            Corso nuovo = converter.corso_convert_to_entity(corso);
+//            // salvo
+//            corsoService.save(nuovo);
+//            //
+//            return ResponseEntity.ok(corso);
+//        }
+//    }
 
 
     // PUT - modifica

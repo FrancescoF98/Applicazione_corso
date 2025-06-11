@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.client.DocenteClient;
+import com.example.demo.data.dto.DocenteDTO;
 import com.example.demo.data.entity.Corso;
 import com.example.demo.repository.CorsoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,32 @@ public class CorsoService {
 
     @Autowired
     CorsoRepository corsoRepository;
+
+    @Autowired
+    DocenteClient docenteClient;
+
+//    public CorsoService(DocenteClient docenteClient) {
+//        this.docenteClient = docenteClient;
+//    }
+
+//    public Corso getCorsoWithDocente(Long docenteId) {
+//        DocenteDTO docente = docenteClient.getDocenteById(docenteId);
+//        Corso corso = new Corso();
+//        corso.setDocente(docente); // assuming docente is of type DocenteDTO
+//        return corso;
+//    }
+
+    public void saveWithDocente(Corso corso){
+        // controllo se il docente esiste
+        DocenteDTO docente = docenteClient.getDocenteById(corso.getIdDoc());
+
+        if (docente == null) {
+            throw new RuntimeException("Docente not found");
+        } else {
+            save(corso);
+        }
+    }
+
 
     public List<Corso> findAll() {
         return corsoRepository.findAll();

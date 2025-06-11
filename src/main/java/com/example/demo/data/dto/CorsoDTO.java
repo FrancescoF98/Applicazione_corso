@@ -1,6 +1,7 @@
 package com.example.demo.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,16 @@ public class CorsoDTO {
 
     private Integer anno_accademico;
 
+    private Long idDoc;
 
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Integer anno_accademico) {
+    public CorsoDTO(Long id, String nome, Integer anno_accademico, Long idDoc) {
         this.id = id;
         this.nome = nome;
         this.anno_accademico = anno_accademico;
+        this.idDoc = idDoc;
     }
 
     @JsonIgnore
@@ -49,5 +52,11 @@ public class CorsoDTO {
         this.anno_accademico = anno_accademico;
     }
 
-}
+    public Long getIdDoc() {
+        return idDoc;
+    }
 
+    public void setIdDoc(Long idDoc) {
+        this.idDoc = idDoc;
+    }
+}

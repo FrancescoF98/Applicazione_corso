@@ -29,6 +29,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
+docente:
+  service:
+    url: http://localhost:8081
+
 # Optional JSP settings (commented out, can be enabled if needed)
 # spring:
 #   mvc:

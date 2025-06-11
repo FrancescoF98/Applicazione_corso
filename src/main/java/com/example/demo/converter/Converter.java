@@ -22,8 +22,9 @@ public class Converter {
             Long id = elementi_in_entrata.get(i).getId();
             String nome = elementi_in_entrata.get(i).getNome();
             Integer anno_accademico = elementi_in_entrata.get(i).getAnno_accademico();
+            Long idDoc = elementi_in_entrata.get(i).getIdDoc();
 
-            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico);
+            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico, idDoc);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -39,6 +40,7 @@ public class Converter {
 
         nuovo_elemento.setId(elementi_in_entrata.getId());
         nuovo_elemento.setNome(elementi_in_entrata.getNome());
+        nuovo_elemento.setIdDoc(elementi_in_entrata.getIdDoc());
 
         return nuovo_elemento;
     }
@@ -55,12 +57,14 @@ public class Converter {
             Long id = elementi_in_entrata.get(i).getId();
             String nome = elementi_in_entrata.get(i).getNome();
             Integer anno_accademico = elementi_in_entrata.get(i).getAnno_accademico();
+            Long idDoc = elementi_in_entrata.get(i).getIdDoc();
             //List<Discente> discenti = discente_convert_to_entity(elementi_in_entrata.get(i).getDiscenti());
 
             Corso nuovo_elemento = new Corso();
             nuovo_elemento.setId(id);
             nuovo_elemento.setNome(nome);
             nuovo_elemento.setAnno_accademico(anno_accademico);
+            nuovo_elemento.setIdDoc(idDoc);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -75,11 +79,13 @@ public class Converter {
         Long id = elementi_in_entrata.getId();
         String nome = elementi_in_entrata.getNome();
         Integer anno_accademico = elementi_in_entrata.getAnno_accademico();
+        Long idDoc = elementi_in_entrata.getIdDoc();
 
         Corso nuovo_elemento = new Corso();
 
         nuovo_elemento.setNome(nome);
         nuovo_elemento.setAnno_accademico(anno_accademico);
+        nuovo_elemento.setIdDoc(idDoc);
 
         return nuovo_elemento;
     }
