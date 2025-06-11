@@ -54,26 +54,6 @@ public class CorsoController {
         return ResponseEntity.ok(corso);
     }
 
-//    // POST - nuovo
-//    @PostMapping("/new")
-//    public ResponseEntity<CorsoDTO> showAdd(@RequestBody CorsoDTO corso) {
-//
-//        // controllo se il docente esiste
-//        DocenteDTO docente = DocenteClient.getDocenteById(corso.getIdDoc());
-//
-//        if (docente == null) {
-//            throw new RuntimeException("Docente not found");
-//        } else {
-//            // converto
-//            Corso nuovo = converter.corso_convert_to_entity(corso);
-//            // salvo
-//            corsoService.save(nuovo);
-//            //
-//            return ResponseEntity.ok(corso);
-//        }
-//    }
-
-
     // PUT - modifica
     @PutMapping("/{id}/edit")
     public ResponseEntity<CorsoDTO> showEdit(@PathVariable Long id, @RequestBody CorsoDTO aggiornato) {
@@ -82,8 +62,9 @@ public class CorsoController {
         //
         corso.setNome(aggiornato.getNome());
         corso.setAnno_accademico(aggiornato.getAnno_accademico());
+        corso.setIdDoc(aggiornato.getIdDoc());
 
-        corsoService.save(corso);
+        corsoService.saveWithDocente(corso);
         return ResponseEntity.ok(aggiornato);
     }
 
