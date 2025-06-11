@@ -71,9 +71,17 @@ public class CorsoController {
         //
         corso.setNome(aggiornato.getNome());
         corso.setAnno_accademico(aggiornato.getAnno_accademico());
+        corso.setIdDoc(aggiornato.getIdDoc());
 
-        corsoService.save(corso);
-        return ResponseEntity.ok(aggiornato);
+        // controllo se il docente esiste
+        DocenteDTO docente = corsoService.getDocenteById(corso.getIdDoc());
+
+        if (docente == null) {
+            throw new RuntimeException("Docente not found");
+        } else {
+            corsoService.save(corso);
+            return ResponseEntity.ok(aggiornato);
+        }
     }
 
 
