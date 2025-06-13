@@ -1,6 +1,7 @@
 package com.example.demo.converter;
 
 import com.example.demo.data.dto.CorsoDTO;
+import com.example.demo.data.dto.DiscenteDTO;
 import com.example.demo.data.entity.Corso;
 import org.springframework.stereotype.Component;
 
@@ -25,8 +26,9 @@ public class Converter {
             Long idDoc = elementi_in_entrata.get(i).getIdDoc();
             String docente_nome = elementi_in_entrata.get(i).getDocente_nome();
             String docente_cognome = elementi_in_entrata.get(i).getDocente_cognome();
+            List<DiscenteDTO> discenti = elementi_in_entrata.get(i).getDiscenti();
 
-            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico, idDoc, docente_nome, docente_cognome);
+            CorsoDTO nuovo_elemento = new CorsoDTO(id, nome, anno_accademico, idDoc, docente_nome, docente_cognome, discenti);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -49,6 +51,7 @@ public class Converter {
         nuovo_elemento.setIdDoc(elementi_in_entrata.getIdDoc());
         nuovo_elemento.setDocente_nome(elementi_in_entrata.getDocente_nome());
         nuovo_elemento.setDocente_cognome(elementi_in_entrata.getDocente_cognome());
+        nuovo_elemento.setDiscenti(elementi_in_entrata.getDiscenti());
 
         return nuovo_elemento;
     }
@@ -72,6 +75,7 @@ public class Converter {
             Long idDoc = elementi_in_entrata.get(i).getIdDoc();
             String docente_nome = elementi_in_entrata.get(i).getDocente_nome();
             String docente_cognome = elementi_in_entrata.get(i).getDocente_cognome();
+            List<DiscenteDTO> discenti = elementi_in_entrata.get(i).getDiscenti();
 
             //List<Discente> discenti = discente_convert_to_entity(elementi_in_entrata.get(i).getDiscenti());
 
@@ -82,6 +86,7 @@ public class Converter {
             nuovo_elemento.setIdDoc(idDoc);
             nuovo_elemento.setDocente_nome(docente_nome);
             nuovo_elemento.setDocente_cognome(docente_cognome);
+            nuovo_elemento.setDiscenti(discenti);
 
             elementi_convertiti.add(nuovo_elemento);
         }
@@ -103,6 +108,7 @@ public class Converter {
         Long idDoc = elementi_in_entrata.getIdDoc();
         String docente_nome = elementi_in_entrata.getDocente_nome();
         String docente_cognome = elementi_in_entrata.getDocente_cognome();
+        List<DiscenteDTO> discenti = elementi_in_entrata.getDiscenti();
 
 
         Corso nuovo_elemento = new Corso();
@@ -112,6 +118,7 @@ public class Converter {
         nuovo_elemento.setIdDoc(idDoc);
         nuovo_elemento.setDocente_nome(docente_nome);
         nuovo_elemento.setDocente_cognome(docente_cognome);
+        nuovo_elemento.setDiscenti(discenti);
 
         return nuovo_elemento;
     }

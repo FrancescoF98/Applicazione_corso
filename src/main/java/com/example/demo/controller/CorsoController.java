@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.converter.Converter;
 import com.example.demo.data.dto.CorsoDTO;
 import com.example.demo.data.entity.Corso;
+import com.example.demo.service.CorsoDiscenteService;
 import com.example.demo.service.CorsoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ public class CorsoController {
     CorsoService corsoService;
 
     @Autowired
+    CorsoDiscenteService corso_discente_service;
+
+    @Autowired
     Converter converter;
 
 
@@ -33,6 +37,9 @@ public class CorsoController {
             corsi = corsoService.ordina_by_nome_desc();
         } else {
             corsi = corsoService.findAll();
+            for (Corso corso : corsi){ // per ogni corso ho bisogno di recuperare i discenti a partire dall'id
+                corso.setDiscenti(corso_discente_service.prendi_lista_studenti(corso.getId()));
+            }
         }
 
         return ResponseEntity.ok(converter.corso_convert_to_dto(corsi));
@@ -48,7 +55,7 @@ public class CorsoController {
         Corso nuovo = converter.corso_convert_to_entity(corso);
 
         // salvo
-        corsoService.saveWithDocente(nuovo);
+        corsoService.saveWithDocenteAndDiscenti(nuovo);
         //
         return ResponseEntity.ok(corso);
     }
@@ -65,8 +72,9 @@ public class CorsoController {
         corso.setIdDoc(aggiornato.getIdDoc());
         corso.setDocente_nome(aggiornato.getDocente_nome());
         corso.setDocente_cognome(aggiornato.getDocente_cognome());
+        corso.setDiscenti(aggiornato.getDiscenti());
 
-        corsoService.saveWithDocente(corso);
+        corsoService.saveWithDocenteAndDiscenti(corso);
         return ResponseEntity.ok(aggiornato);
     }
 

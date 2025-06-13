@@ -21,16 +21,19 @@ public class CorsoDTO {
 
     private String docente_cognome;
 
+    private List<DiscenteDTO> discenti;
+
     /* costruttori */
     public CorsoDTO() {}
 
-    public CorsoDTO(Long id, String nome, Integer anno_accademico, Long idDoc, String docente_nome, String docente_cognome) {
+    public CorsoDTO(Long id, String nome, Integer anno_accademico, Long idDoc, String docente_nome, String docente_cognome, List<DiscenteDTO> discenti) {
         this.id = id;
         this.nome = nome;
         this.anno_accademico = anno_accademico;
         this.idDoc = idDoc;
         this.docente_nome = docente_nome;
         this.docente_cognome = docente_cognome;
+        this.discenti = discenti;
     }
 
     @JsonIgnore
@@ -80,5 +83,13 @@ public class CorsoDTO {
 
     public void setDocente_cognome(String docente_cognome) {
         this.docente_cognome = docente_cognome;
+    }
+
+    public List<DiscenteDTO> getDiscenti() {
+        return discenti;
+    }
+
+    public void setDiscenti(List<DiscenteDTO> discenti) {
+        this.discenti = discenti;
     }
 }
