@@ -29,6 +29,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
+  jwt:
+    secret: mySecretKeyForJWTTokenGenerationThatShouldBeAtLeast256BitsLong
 # Optional JSP settings (commented out, can be enabled if needed)
 # spring:
 #   mvc:
