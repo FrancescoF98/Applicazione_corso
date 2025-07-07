@@ -36,7 +36,7 @@ public class CorsoDTO {
         this.discenti = discenti;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     public Long getId() {
         return id;
     }
